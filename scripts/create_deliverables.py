@@ -391,6 +391,7 @@ add_text(s, .88, 3.0, 10.5, .75, "物理模型與 AI 公式的比較實驗", 23,
 add_text(s, .9, 4.15, 10.9, .75, "以 TWSE 官方日收盤價，檢驗兩檔台股對數價差變化的樣本外預測", 17, INK)
 bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, PptInches(.9), PptInches(5.15), PptInches(2.0), PptInches(.06)); bar.fill.solid(); bar.fill.fore_color.rgb=TEAL; bar.line.fill.background()
 add_text(s, .9, 5.45, 10.8, .38, "台積電（2330）× 聯發科（2454）　｜　2026 年 5–10 月　｜　研究報告摘要", 12, MUTED_PPT)
+add_text(s, .9, 6.25, 10.8, .35, "物理三　｜　林映霖", 12, MUTED_PPT)
 add_text(s, .65, 7.12, 12, .2, "物理啟發的回復模型　×　PySR 符號回歸　×　固定時間樣本外評估　　01 / 08", 8, MUTED_PPT)
 
 # 2 Motivation and question

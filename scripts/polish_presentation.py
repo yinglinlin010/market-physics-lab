@@ -7,7 +7,7 @@ import sys
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE_TYPE
-from pptx.util import Pt
+from pptx.util import Inches, Pt
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,6 +39,17 @@ def set_cell_fill(cell, color: RGBColor) -> None:
 
 def polish(input_path: Path, output_path: Path) -> None:
     prs = Presentation(input_path)
+    cover = prs.slides[0]
+    if not any(getattr(shape, "has_text_frame", False) and shape.text.strip() == "物理三　｜　林映霖" for shape in cover.shapes):
+        identity = cover.shapes.add_textbox(Inches(.9), Inches(6.25), Inches(10.8), Inches(.35))
+        identity.text_frame.margin_left = identity.text_frame.margin_right = Inches(.04)
+        identity.text_frame.margin_top = identity.text_frame.margin_bottom = Inches(.03)
+        paragraph = identity.text_frame.paragraphs[0]
+        paragraph.text = "物理三　｜　林映霖"
+        paragraph.font.name = "PingFang TC"
+        paragraph.font.size = Pt(12)
+        paragraph.font.color.rgb = RGBColor(95, 114, 122)
+
     for slide_number, slide in enumerate(prs.slides, start=1):
         shapes = list(slide.shapes)
         for i, shape in enumerate(shapes):
