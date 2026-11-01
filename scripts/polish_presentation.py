@@ -7,6 +7,7 @@ import sys
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE_TYPE
+from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches, Pt
 
 
@@ -49,6 +50,22 @@ def polish(input_path: Path, output_path: Path) -> None:
         paragraph.font.name = "PingFang TC"
         paragraph.font.size = Pt(12)
         paragraph.font.color.rgb = RGBColor(95, 114, 122)
+    for shape in cover.shapes:
+        if not getattr(shape, "has_text_frame", False):
+            continue
+        text = shape.text.strip()
+        replacement = None
+        if text.startswith("期中專題研究發表"):
+            replacement = "期中專題研究發表"
+        elif text.startswith("台積電（2330）× 聯發科（2454）"):
+            replacement = "台積電（2330）× 聯發科（2454）　｜　2026 年 5–10 月"
+        elif text.startswith("物理啟發的回復模型"):
+            replacement = "01 / 08"
+            shape.text_frame.paragraphs[0].alignment = PP_ALIGN.RIGHT
+        if replacement is not None and shape.text_frame.paragraphs[0].runs:
+            shape.text_frame.paragraphs[0].runs[0].text = replacement
+            for run in shape.text_frame.paragraphs[0].runs[1:]:
+                run.text = ""
 
     for slide_number, slide in enumerate(prs.slides, start=1):
         shapes = list(slide.shapes)
