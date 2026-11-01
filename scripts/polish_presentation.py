@@ -99,7 +99,7 @@ def polish(input_path: Path, output_path: Path) -> None:
                             for run in paragraph.runs:
                                 run.font.name = "PingFang TC"
                                 run.font.color.rgb = INK
-                                run.font.size = Pt(11 if r == 0 else 10.5)
+                                run.font.size = Pt(12)
                                 run.font.bold = r == 0 or c == 0
 
         # Consistent text color and measurable reading sizes for source notes.
@@ -116,26 +116,26 @@ def polish(input_path: Path, output_path: Path) -> None:
             if slide_number == 8 and text.startswith("Engle & Granger"):
                 for paragraph in shape.text_frame.paragraphs:
                     for run in paragraph.runs:
-                        run.font.size = Pt(10.5)
+                        run.font.size = Pt(12)
                         run.font.color.rgb = INK
             if text.startswith("註：相對改善"):
                 for paragraph in shape.text_frame.paragraphs:
                     for run in paragraph.runs:
-                        run.font.size = Pt(10)
+                        run.font.size = Pt(12)
                         run.font.color.rgb = RGBColor(95, 114, 122)
             if text.startswith("預測資訊日"):
                 for paragraph in shape.text_frame.paragraphs:
                     for run in paragraph.runs:
-                        run.font.size = Pt(10)
+                        run.font.size = Pt(12)
                         run.font.color.rgb = RGBColor(95, 114, 122)
             if text.startswith("PySR 方法參考"):
                 for paragraph in shape.text_frame.paragraphs:
                     for run in paragraph.runs:
-                        run.font.size = Pt(10)
+                        run.font.size = Pt(12)
             if text.startswith("後續：事先固定"):
                 for paragraph in shape.text_frame.paragraphs:
                     for run in paragraph.runs:
-                        run.font.size = Pt(11)
+                        run.font.size = Pt(12)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     prs.save(output_path)

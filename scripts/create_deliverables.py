@@ -37,16 +37,16 @@ labels = ["無變化基準", "線性回復／OU 啟發", "PySR 符號回歸"]
 fig, axes = plt.subplots(1, 2, figsize=(10, 4), dpi=180)
 for ax, column, title in zip(axes, ["MAE", "RMSE"], ["平均絕對誤差（MAE）", "均方根誤差（RMSE）"]):
     bars = ax.bar(labels, metrics[column].to_numpy(), color=COLORS, width=.62)
-    ax.bar_label(bars, fmt="%.5f", padding=3, fontsize=8)
-    ax.set_title(title, fontsize=10, pad=10)
-    ax.set_ylabel("測試集誤差（對數價差變化）", fontsize=8)
-    ax.tick_params(axis="x", labelrotation=10, labelsize=8)
-    ax.tick_params(axis="y", labelsize=8)
+    ax.bar_label(bars, fmt="%.5f", padding=3, fontsize=12)
+    ax.set_title(title, fontsize=12, pad=10)
+    ax.set_ylabel("測試集誤差（對數價差變化）", fontsize=12)
+    ax.tick_params(axis="x", labelrotation=10, labelsize=12)
+    ax.tick_params(axis="y", labelsize=12)
     ax.spines[["top", "right"]].set_visible(False)
     ax.grid(axis="y", color="#DCE2DD", linewidth=.6)
     ax.set_axisbelow(True)
     ax.set_ylim(0, max(metrics[column]) * 1.28)
-fig.suptitle("TWSE 官方樣本｜24 個一步預測測試目標", fontsize=11, y=1.02)
+fig.suptitle("TWSE 官方樣本｜24 個一步預測測試目標", fontsize=12, y=1.02)
 fig.tight_layout()
 error_figure = ASSETS / "academic_test_errors.png"
 fig.savefig(error_figure, facecolor="white", bbox_inches="tight")
@@ -56,13 +56,13 @@ fig, ax = plt.subplots(figsize=(9, 3.7), dpi=180)
 ax.plot(preds.date, preds.actual_dx, color="#172A35", lw=1.8, marker="o", ms=2.5, label="實際 Δx")
 for name, color in zip(metrics.index, COLORS):
     ax.plot(preds.date, preds[f"{name}_pred_dx"], color=color, lw=1.25, ls="--", label=name)
-ax.set_title("測試期間逐日價差變化：實際值與一步預測", fontsize=10)
-ax.set_ylabel("Δx（對數價差變化）", fontsize=8)
-ax.set_xlabel("預測資訊日 t（目標為下一交易日）", fontsize=8)
-ax.tick_params(labelsize=8)
+ax.set_title("測試期間逐日價差變化：實際值與一步預測", fontsize=12)
+ax.set_ylabel("Δx（對數價差變化）", fontsize=12)
+ax.set_xlabel("預測資訊日 t（目標為下一交易日）", fontsize=12)
+ax.tick_params(labelsize=12)
 ax.spines[["top", "right"]].set_visible(False)
 ax.grid(color="#E6E9E6", linewidth=.55)
-ax.legend(frameon=False, ncol=2, fontsize=7, loc="upper left")
+ax.legend(frameon=False, ncol=2, fontsize=12, loc="upper left")
 fig.tight_layout()
 prediction_figure = ASSETS / "academic_test_predictions.png"
 fig.savefig(prediction_figure, facecolor="white", bbox_inches="tight")
@@ -345,6 +345,8 @@ WHITE = PptColor(255, 255, 255)
 
 
 def add_text(slide, x, y, w, h, text, size=18, color=INK, bold=False, align=PP_ALIGN.LEFT, font="PingFang TC"):
+    # Presentation rule: all visible text must be at least 12 pt.
+    size = max(12, size)
     shape = slide.shapes.add_textbox(PptInches(x), PptInches(y), PptInches(w), PptInches(h))
     tf = shape.text_frame
     tf.clear()
@@ -371,7 +373,7 @@ def add_slide(title, number, section_label="研究發表"):
     add_text(slide, .65, .68, 12, .62, title, 26, INK, True)
     rule = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, PptInches(.65), PptInches(1.38), PptInches(12), PptInches(.025))
     rule.fill.solid(); rule.fill.fore_color.rgb = TEAL; rule.line.fill.background()
-    add_text(slide, .65, 7.12, 12, .2, f"TWSE 官方固定樣本｜預測目標為下一交易日價差變化　　{number:02d} / 08", 8, MUTED_PPT)
+    add_text(slide, .65, 6.95, 12, .35, f"TWSE 官方固定樣本｜預測目標為下一交易日價差變化　　{number:02d} / 08", 12, MUTED_PPT)
     return slide
 
 
@@ -392,7 +394,7 @@ add_text(s, .9, 4.15, 10.9, .75, "以 TWSE 官方日收盤價，檢驗兩檔台�
 bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, PptInches(.9), PptInches(5.15), PptInches(2.0), PptInches(.06)); bar.fill.solid(); bar.fill.fore_color.rgb=TEAL; bar.line.fill.background()
 add_text(s, .9, 5.45, 10.8, .38, "台積電（2330）× 聯發科（2454）　｜　2026 年 5–10 月", 12, MUTED_PPT)
 add_text(s, .9, 6.25, 10.8, .35, "物理三　｜　林映霖", 12, MUTED_PPT)
-add_text(s, .65, 7.12, 12, .2, "01 / 08", 8, MUTED_PPT, align=PP_ALIGN.RIGHT)
+add_text(s, .65, 6.95, 12, .35, "01 / 08", 12, MUTED_PPT, align=PP_ALIGN.RIGHT)
 
 # 2 Motivation and question
 s=add_slide("研究動機與問題設定",2)
@@ -446,7 +448,7 @@ for row in tab.rows:
         for p in cell.text_frame.paragraphs:
             p.alignment=PP_ALIGN.CENTER
             for run in p.runs:
-                run.font.name="PingFang TC"; run.font.size=PptPt(10); run.font.color.rgb=INK
+                run.font.name="PingFang TC"; run.font.size=PptPt(12); run.font.color.rgb=INK
                 if cell is row.cells[0]: run.font.bold=True
 add_text(s,8.55,5.0,3.8,.55,"H2 未獲支持：兩候選模型均未降低測試誤差。",15,ORANGE,True)
 add_text(s,8.55,5.8,3.8,.75,"OU −5.15%\nPySR −20.16%\nRMSE 排序相同。",13,INK)
