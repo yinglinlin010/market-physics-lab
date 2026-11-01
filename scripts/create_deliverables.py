@@ -373,7 +373,7 @@ def add_slide(title, number, section_label="研究發表"):
     add_text(slide, .65, .68, 12, .62, title, 26, INK, True)
     rule = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, PptInches(.65), PptInches(1.38), PptInches(12), PptInches(.025))
     rule.fill.solid(); rule.fill.fore_color.rgb = TEAL; rule.line.fill.background()
-    add_text(slide, .65, 6.95, 12, .35, f"{number:02d} / 08", 12, MUTED_PPT, align=PP_ALIGN.RIGHT)
+    add_text(slide, .65, 6.95, 12, .35, f"{number:02d} / 09", 12, MUTED_PPT, align=PP_ALIGN.RIGHT)
     return slide
 
 
@@ -394,10 +394,17 @@ add_text(s, .9, 4.15, 10.9, .75, "以 TWSE 官方日收盤價，檢驗兩檔台�
 bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, PptInches(.9), PptInches(5.15), PptInches(2.0), PptInches(.06)); bar.fill.solid(); bar.fill.fore_color.rgb=TEAL; bar.line.fill.background()
 add_text(s, .9, 5.45, 10.8, .38, "台積電（2330）× 聯發科（2454）　｜　2026 年 5–10 月", 12, MUTED_PPT)
 add_text(s, .9, 6.25, 10.8, .35, "物理三　｜　林映霖", 12, MUTED_PPT)
-add_text(s, .65, 6.95, 12, .35, "01 / 08", 12, MUTED_PPT, align=PP_ALIGN.RIGHT)
+add_text(s, .65, 6.95, 12, .35, "01 / 09", 12, MUTED_PPT, align=PP_ALIGN.RIGHT)
 
-# 2 User workflow
-s=add_slide("操作總覽｜從設定到匯出，六步完成一次比較",2)
+# 2 Project purpose
+s=add_slide("專案用途｜把股票模型比較做成可操作、可核對的研究流程",2)
+add_panel(s,.8,1.75,3.8,3.65,"給誰使用","適合需要展示時間序列、物理啟發模型與符號回歸的學生或研究初學者。\n\n使用者可直接選資料並執行，不必自行拼接分析程式。",TEAL,15)
+add_panel(s,4.78,1.75,3.8,3.65,"要解決什麼問題","不同模型若使用不同日期或切分方式，誤差就難以公平比較。\n\n本工具固定共同目標與時間順序，並把訓練、驗證、測試角色說清楚。",ORANGE,15)
+add_panel(s,8.76,1.75,3.8,3.65,"使用者能帶走什麼","一次完成資料檢查、模型比較、圖表與公式解讀。\n\n結果可下載逐日 CSV，並展開來源、參數與實驗紀錄供核對。",TEAL,15)
+add_text(s,.95,5.9,11.3,.55,"用途定位：教學與研究展示工具；預測誤差比較不等於投資建議或獲利證據。",15,INK,True)
+
+# 3 User workflow
+s=add_slide("操作總覽｜從設定到匯出，六步完成一次比較",3)
 for x,y,w,h,n,title,body_text,color in [
     (.85,1.75,3.65,1.65,"01","選資料","離線官方樣本、合成資料、線上 TWSE 或本機 CSV。",TEAL),
     (4.85,1.75,3.65,1.65,"02","定條件","選股票與日期，設定訓練、驗證比例及 PySR 搜尋範圍。",TEAL),
@@ -410,13 +417,13 @@ for x,y,w,h,n,title,body_text,color in [
 add_text(s,.95,6.12,11.3,.45,"下列頁面依照實際介面順序，說明每一步要按什麼、會看到什麼。",15,INK,True)
 
 # 3 Configure the experiment
-s=add_slide("操作 1｜選擇資料，設定比較條件",3)
+s=add_slide("操作 1｜選擇資料，設定比較條件",4)
 add_panel(s,.8,1.72,5.65,3.85,"左側設定欄","① 選資料來源：離線 TWSE 樣本最適合現場展示；也可選合成、線上資料或本機 CSV。\n\n② 指定兩檔股票與日期範圍。\n\n③ 設定訓練／驗證比例，以及 PySR 搜尋迭代與公式複雜度。",TEAL,15)
 add_panel(s,6.85,1.72,5.65,3.85,"執行前先確認","主畫面會摘要顯示股票、期間、時間切分與評估目標。\n\n資料來源、價格調整方式及版本指紋可在結果區展開查看。\n\n改動任何設定後，舊結果會清除，避免把不同條件的結果混在一起。",ORANGE,15)
 add_text(s,.95,6.05,11.2,.45,"展示建議：使用隨專案保存的官方樣本；無須在現場下載資料或安裝套件。",15,INK,True)
 
 # 4 Run and understand the three models
-s=add_slide("操作 2｜執行比較，理解三個模型各自代表什麼",4)
+s=add_slide("操作 2｜執行比較，理解三個模型各自代表什麼",5)
 add_text(s,.95,1.62,11.3,.55,"按「執行比較」後，介面會檢查資料、建立價差、估計模型，再對同一批測試日期評分。",16,INK,True)
 add_panel(s,.8,2.45,3.8,2.8,"無變化基準","假設下一期價差變化為零。\n\n用途：提供簡單且透明的比較起點。",MUTED_PPT,15)
 add_panel(s,4.78,2.45,3.8,2.8,"線性回復／OU 啟發","公式：Δx̂ₜ₊₁ = a + b xₜ\n\n用途：查看價差偏離與下一期變化是否呈線性關聯。",TEAL,15)
@@ -424,7 +431,7 @@ add_panel(s,8.76,2.45,3.8,2.8,"PySR 替代公式","從訓練資料搜尋候選�
 add_text(s,.95,5.72,11.2,.55,"操作提示：等狀態訊息顯示完成，再往下讀圖；設定變動會讓本次結果失效。",15,INK,True)
 
 # 5 Read charts and metrics
-s=add_slide("操作 3｜先看測試圖與誤差指標",5)
+s=add_slide("操作 3｜先看測試圖與誤差指標",6)
 s.shapes.add_picture(str(error_figure),PptInches(.62),PptInches(1.62),width=PptInches(7.55))
 add_panel(s,8.45,1.72,4.05,1.65,"先比較 MAE","越低代表本次測試的平均絕對誤差越小。",TEAL,14)
 add_panel(s,8.45,3.58,4.05,1.65,"再看 RMSE","對較大的預測誤差給予較高權重。",TEAL,14)
@@ -432,7 +439,7 @@ add_panel(s,8.45,5.42,4.05,1.0,"看相對改善","負值代表比無變化基準
 add_text(s,.8,6.67,7.3,.25,"圖表與表格呈現同一組保留測試目標；本例基準誤差最低。",12,MUTED_PPT)
 
 # 6 Inspect prediction trace and equations
-s=add_slide("操作 4｜對照逐日預測，查看方程式如何解讀",6)
+s=add_slide("操作 4｜對照逐日預測，查看方程式如何解讀",7)
 s.shapes.add_picture(str(prediction_figure),PptInches(.62),PptInches(1.7),width=PptInches(7.4))
 add_panel(s,8.35,1.72,4.15,1.62,"上方折線圖","逐日比較實際價差變化與三種模型預測；查看模型是否跟上波動方向與幅度。",TEAL,13)
 add_panel(s,8.35,3.55,4.15,1.62,"模型方程","頁面列出 OU 估計式與 PySR 選定公式，並提供變數順序及白話說明。",TEAL,13)
@@ -440,13 +447,13 @@ add_panel(s,8.35,5.38,4.15,1.0,"解讀原則","公式可讀，不等於穩定或
 add_text(s,.75,6.7,7.2,.25,"介面另提供價差水準圖，輔助理解預測變化如何累積。",12,MUTED_PPT)
 
 # 7 Inspect conclusion and audit trail
-s=add_slide("操作 5｜讀自動結論，展開實驗細節",7)
+s=add_slide("操作 5｜讀自動結論，展開實驗細節",8)
 add_panel(s,.85,1.75,5.5,3.7,"結論區會回答","• 哪個模型 MAE 最低？\n\n• OU 訓練期是否符合線性回復條件？\n\n• 本次結果支持或不支持誤差改善？",TEAL,15)
 add_panel(s,6.75,1.75,5.5,3.7,"展開紀錄可核對","• 資料來源、取得時間、調整方式與版本雜湊。\n\n• 訓練／驗證／測試日期及模型參數。\n\n• PySR 候選公式與實驗中繼資料。",ORANGE,15)
 add_text(s,.95,6.0,11.2,.5,"結論只描述這次樣本外誤差；不代表因果證據、長期穩定性或投資報酬。",15,INK,True)
 
 # 8 Export and live demo sequence
-s=add_slide("操作 6｜下載結果，完成 90 秒展示",8)
+s=add_slide("操作 6｜下載結果，完成 90 秒展示",9)
 add_panel(s,.85,1.75,5.5,3.55,"匯出與重現","按「下載逐日預測 CSV」，保存每個測試日期的實際值與模型預測。\n\n展開「實驗紀錄與候選公式」，核對公式、設定及資料版本。\n\n重啟後仍可用隨附官方樣本重做展示。",TEAL,15)
 add_panel(s,6.75,1.75,5.5,3.55,"現場操作順序","1. 開啟本機 Streamlit 研究工具。\n2. 保留官方樣本與預設切分。\n3. 按「執行比較」，等待完成。\n4. 指出基準模型誤差最低。\n5. 展開公式，最後下載 CSV。",ORANGE,15)
 add_text(s,.95,5.85,11.2,.7,"本次實證示範的核心：模型能否勝過簡單基準，由保留測試資料回答；沒有勝出也是有效結果。",16,INK,True)
@@ -470,4 +477,4 @@ script = """# 90 秒操作展示講稿
 **76–90 秒｜下載與收尾** 按「下載逐日預測 CSV」保存結果。這個工具讓人可操作地比較物理啟發模型、AI 搜尋公式和簡單基準；本次沒有勝過基準也是研究結果，預測誤差不等於投資獲利。
 """
 (SLIDES / "90s_script.md").write_text(script, encoding="utf-8")
-print("Generated academic report, 8-slide presentation, and 90-second script.")
+print("Generated academic report, 9-slide presentation, and 90-second script.")
