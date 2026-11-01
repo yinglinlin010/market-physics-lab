@@ -373,7 +373,7 @@ def add_slide(title, number, section_label="研究發表"):
     add_text(slide, .65, .68, 12, .62, title, 26, INK, True)
     rule = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, PptInches(.65), PptInches(1.38), PptInches(12), PptInches(.025))
     rule.fill.solid(); rule.fill.fore_color.rgb = TEAL; rule.line.fill.background()
-    add_text(slide, .65, 6.95, 12, .35, f"TWSE 官方固定樣本｜預測目標為下一交易日價差變化　　{number:02d} / 08", 12, MUTED_PPT)
+    add_text(slide, .65, 6.95, 12, .35, f"{number:02d} / 08", 12, MUTED_PPT, align=PP_ALIGN.RIGHT)
     return slide
 
 
