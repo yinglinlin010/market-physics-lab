@@ -1,0 +1,24 @@
+[project]
+name = "market-physics-lab"
+version = "0.1.0"
+description = "可重現的股票價差回復模型與 PySR 公式比較研究工具"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "streamlit>=1.40,<2",
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "scikit-learn>=1.5,<2",
+  "plotly>=5.24,<7",
+  "pysr>=1.5,<2",
+  "python-docx>=1.1,<2",
+  "python-pptx>=1.0,<2",
+  "matplotlib>=3.9,<4",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+pythonpath = ["."]

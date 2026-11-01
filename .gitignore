@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.streamlit/secrets.toml
+data/private/
+data/uploaded_prices.csv
+data/.twse-cache/
+artifacts/latest/
+artifacts/smoke/
+artifacts/pysr/
+artifacts/**/pysr/
+.impeccable/questions/
+.impeccable/review/
+.DS_Store

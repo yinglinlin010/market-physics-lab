@@ -1,0 +1,81 @@
+{
+  "created_at": "2026-11-01T13:28:35.129268+00:00",
+  "tickers": [
+    "A_SYN",
+    "B_SYN"
+  ],
+  "price_hash": "33cd119bc90d61c8dc01bed134eb57736cd71985cb3fadb89b759348cc623d36",
+  "n_prices": 900,
+  "split": {
+    "train_end": 540,
+    "valid_end": 720,
+    "n": 900,
+    "train_dates": [
+      "2021-01-04",
+      "2023-01-27"
+    ],
+    "valid_dates": [
+      "2023-01-30",
+      "2023-10-06"
+    ],
+    "test_dates": [
+      "2023-10-09",
+      "2024-06-14"
+    ]
+  },
+  "alpha_train": 0.11857501825532069,
+  "beta_train": 1.0874439782929104,
+  "target": "y_t = x_(t+1)-x_t; input known at t",
+  "features": [
+    "x",
+    "dx_lag1",
+    "vol20"
+  ],
+  "pysr_formula": {
+    "features": [
+      "x",
+      "dx_lag1",
+      "vol20"
+    ],
+    "seed": 42,
+    "niterations": 20,
+    "maxsize": 16,
+    "pysr_version": "1.5.10",
+    "selected_equation": "((x * 0.054307003) + ((x + dx_lag1) * dx_lag1)) * -1.564328",
+    "selected_index": 5,
+    "selected_complexity": 11,
+    "validation_mae": 0.009841864996752202,
+    "selection_rule": "驗證 MAE 最低；同分選複雜度較低者",
+    "training_fingerprint": "75b48d547b14bf6d40e26e489a855ef8635b40d734ace0034bd8a8bd66c3c598",
+    "searched_at": "2026-11-01T13:29:38.082209+00:00",
+    "origin": "PySR 1.5.10 預先搜尋；僅訓練資料參與搜尋，以驗證資料選式",
+    "binary_operators": [
+      "+",
+      "-",
+      "*"
+    ],
+    "unary_operators": [],
+    "deterministic": true,
+    "parallelism": "serial",
+    "preprocessing": "none; natural units; features x, dx_lag1, vol20",
+    "prediction_parity": {
+      "split": "validation",
+      "max_abs_error": 1.734723475976807e-18,
+      "verified_against": "PySRRegressor.predict(index=selected_index)"
+    }
+  },
+  "selection_used_test": false,
+  "note": "測試資料只在公式定版後評估。",
+  "formula_search": "預先搜尋並保存；評估現場執行",
+  "data_provenance": {
+    "source": "本機合成資料（seed=42）",
+    "retrieved_at": "即時固定種子產生",
+    "adjustment": "模擬 Close 價格，非真實行情",
+    "version": "synthetic-v1-seed-42"
+  },
+  "formula_prediction_parity": {
+    "split": "validation",
+    "max_abs_error": 1.734723475976807e-18,
+    "verified_against": "PySRRegressor.predict(index=selected_index)"
+  }
+}

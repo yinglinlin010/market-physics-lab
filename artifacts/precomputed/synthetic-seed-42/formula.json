@@ -1,0 +1,33 @@
+{
+  "features": [
+    "x",
+    "dx_lag1",
+    "vol20"
+  ],
+  "seed": 42,
+  "niterations": 20,
+  "maxsize": 16,
+  "pysr_version": "1.5.10",
+  "selected_equation": "((x * 0.054307003) + ((x + dx_lag1) * dx_lag1)) * -1.564328",
+  "selected_index": 5,
+  "selected_complexity": 11,
+  "validation_mae": 0.009841864996752202,
+  "selection_rule": "驗證 MAE 最低；同分選複雜度較低者",
+  "training_fingerprint": "75b48d547b14bf6d40e26e489a855ef8635b40d734ace0034bd8a8bd66c3c598",
+  "searched_at": "2026-11-01T13:29:38.082209+00:00",
+  "origin": "PySR 1.5.10 預先搜尋；僅訓練資料參與搜尋，以驗證資料選式",
+  "binary_operators": [
+    "+",
+    "-",
+    "*"
+  ],
+  "unary_operators": [],
+  "deterministic": true,
+  "parallelism": "serial",
+  "preprocessing": "none; natural units; features x, dx_lag1, vol20",
+  "prediction_parity": {
+    "split": "validation",
+    "max_abs_error": 1.734723475976807e-18,
+    "verified_against": "PySRRegressor.predict(index=selected_index)"
+  }
+}

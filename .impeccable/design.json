@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T14:10:00Z",
+  "title": "Design System: Market Physics Lab",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Evergreen",
+        "canonical": "#137C78",
+        "tonalRamp": [
+          "#092E2C",
+          "#0C524E",
+          "#116C68",
+          "#137C78",
+          "#3CA7A0",
+          "#79C3BD",
+          "#B3DED9",
+          "#EDF7F5"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Deep Ink",
+        "canonical": "#172A35",
+        "tonalRamp": [
+          "#101C23",
+          "#172A35",
+          "#2D414C",
+          "#52636B",
+          "#75838A",
+          "#A5AFB3",
+          "#CDD3D4",
+          "#EFF1F0"
+        ]
+      },
+      "secondary-action": {
+        "role": "secondary",
+        "displayName": "Rust",
+        "canonical": "#D16B3C",
+        "tonalRamp": [
+          "#3D1E10",
+          "#71361D",
+          "#A64E29",
+          "#D16B3C",
+          "#E28A63",
+          "#EDAF93",
+          "#F5D2C2",
+          "#FCF0E9"
+        ]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#F6F4EE",
+        "tonalRamp": [
+          "#25231E",
+          "#4B4840",
+          "#737067",
+          "#A09D94",
+          "#C2BFB5",
+          "#DEDCD4",
+          "#ECEAE3",
+          "#F6F4EE"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Evidence White",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#292929",
+          "#535353",
+          "#777777",
+          "#999999",
+          "#BBBBBB",
+          "#D5D5D5",
+          "#EAEAEA",
+          "#FFFFFF"
+        ]
+      },
+      "sidebar": {
+        "role": "neutral",
+        "displayName": "Configuration Green",
+        "canonical": "#EAF0ED",
+        "tonalRamp": [
+          "#1E2A25",
+          "#40544A",
+          "#66776E",
+          "#8C9A93",
+          "#AEB9B3",
+          "#C6D0CA",
+          "#DCE4DF",
+          "#EAF0ED"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Divider",
+        "canonical": "#DCE2DD",
+        "tonalRamp": [
+          "#25302A",
+          "#48534D",
+          "#707B75",
+          "#929D97",
+          "#AEB9B3",
+          "#C2CDC6",
+          "#D1DCD5",
+          "#DCE2DD"
+        ]
+      },
+      "muted-text": {
+        "role": "neutral",
+        "displayName": "Secondary Text",
+        "canonical": "#5F727A",
+        "tonalRamp": [
+          "#1B2529",
+          "#35464C",
+          "#4B5E65",
+          "#5F727A",
+          "#7D8E94",
+          "#A4B0B4",
+          "#CDD4D6",
+          "#F0F2F2"
+        ]
+      },
+      "primary-soft": {
+        "role": "primary",
+        "displayName": "Formula Tint",
+        "canonical": "#E9F3F1",
+        "tonalRamp": [
+          "#12302D",
+          "#27524D",
+          "#46726E",
+          "#71938F",
+          "#9FBAB6",
+          "#BED2CF",
+          "#D7E6E3",
+          "#E9F3F1"
+        ]
+      },
+      "baseline-series": {
+        "role": "neutral",
+        "displayName": "Baseline Gray Green",
+        "canonical": "#9AA9A5",
+        "tonalRamp": [
+          "#25302E",
+          "#465653",
+          "#697A76",
+          "#84948F",
+          "#9AA9A5",
+          "#B4C0BC",
+          "#CED7D3",
+          "#E8ECE9"
+        ]
+      },
+      "formula-ink": {
+        "role": "neutral",
+        "displayName": "Formula Ink",
+        "canonical": "#134E4B",
+        "tonalRamp": [
+          "#10201F",
+          "#203937",
+          "#31534F",
+          "#44706B",
+          "#5C8F89",
+          "#83AAA5",
+          "#B5CECB",
+          "#E4F0EE"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Evergreen Hover",
+        "canonical": "#0D625F",
+        "tonalRamp": [
+          "#082C2A",
+          "#0A423F",
+          "#0B5551",
+          "#0D625F",
+          "#347D79",
+          "#6AA09D",
+          "#A5C5C3",
+          "#DFEFED"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "interface": {
+        "displayName": "Interface Sans",
+        "purpose": "Traditional Chinese UI, labels, and prose using local system fonts."
+      },
+      "equation": {
+        "displayName": "Equation Mono",
+        "purpose": "Equations and machine-shaped values only."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "state-transition",
+        "value": "0.18s ease-out",
+        "purpose": "Small interactive state changes only; no staged page entrance."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "workbench-stack",
+        "value": "700px",
+        "purpose": "Stack the result columns and compact page spacing."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Starts the model comparison.",
+      "html": "<button class=\"ds-btn-primary\">執行比較</button>",
+      "css": ".ds-btn-primary { background: #137C78; color: #FFFFFF; min-height: 45px; padding: 10px 18px; border: 1px solid #137C78; border-radius: 8px; font: 600 16px/1.4 'PingFang TC','Microsoft JhengHei',sans-serif; transition: background-color .18s ease-out; } .ds-btn-primary:hover { background: #0D625F; border-color: #0D625F; } .ds-btn-primary:focus-visible { outline: 3px solid #D16B3C; outline-offset: 2px; } .ds-btn-primary:active { background: #0C524E; }"
+    },
+    {
+      "name": "Evidence Panel",
+      "kind": "card",
+      "refersTo": "evidence-panel",
+      "description": "Groups the active data source and split summary.",
+      "html": "<section class=\"ds-evidence\"><b>資料</b>　2330、2454<br><b>切分</b>　訓練／驗證／測試</section>",
+      "css": ".ds-evidence { background: #FFFFFF; color: #172A35; border: 1px solid #DCE2DD; border-radius: 8px; padding: 15px 18px; font: 400 16px/1.65 'PingFang TC','Microsoft JhengHei',sans-serif; }"
+    },
+    {
+      "name": "Formula Panel",
+      "kind": "custom",
+      "refersTo": "formula-panel",
+      "description": "Shows the selected equation with safe wrapping.",
+      "html": "<div class=\"ds-formula\">Δx̂ₜ = a + b × xₜ</div>",
+      "css": ".ds-formula { background: #E9F3F1; color: #134E4B; border-radius: 5px; padding: 8px 10px; font: 400 14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; overflow-wrap: anywhere; }"
+    },
+    {
+      "name": "Metric",
+      "kind": "custom",
+      "description": "Presents an MAE or RMSE value with a compact label.",
+      "html": "<div class=\"ds-metric\"><small>MAE</small><strong>0.0085</strong></div>",
+      "css": ".ds-metric { background: #FFFFFF; color: #172A35; border: 1px solid #DCE2DD; border-radius: 8px; padding: 14px 18px; font-family: 'PingFang TC','Microsoft JhengHei',sans-serif; font-variant-numeric: tabular-nums; } .ds-metric small { display: block; color: #5F727A; font-size: 13px; } .ds-metric strong { display: block; margin-top: 4px; font-size: 22px; font-weight: 600; }"
+    },
+    {
+      "name": "Experiment Notice",
+      "kind": "custom",
+      "description": "Clarifies the saved-formula demonstration path.",
+      "html": "<aside class=\"ds-notice\">公式預先搜尋，評估現場執行。</aside>",
+      "css": ".ds-notice { background: #E9F3F1; color: #134E4B; border-radius: 8px; padding: 10px 14px; font: 500 14px/1.5 'PingFang TC','Microsoft JhengHei',sans-serif; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Research Workbench",
+    "overview": "The screen makes one research task feel orderly: set the data and time boundary, run three comparable models, then inspect the evidence. The visual language stays quiet enough for formulas and plotted values to carry attention. Warm paper, evergreen actions, and a single rust comparison color distinguish the controls from the result series.",
+    "keyCharacteristics": [
+      "The product shell stays familiar: Streamlit controls in the left rail, evidence and results in the main work area.",
+      "A shared grid, restrained borders, and tabular numbers keep dates and metrics scan-friendly.",
+      "Teal identifies the main action and OU series; rust identifies PySR and state that deserves attention; gray-green marks the no-change baseline.",
+      "Equations use a monospace face only where their characters benefit from alignment."
+    ],
+    "rules": [
+      {
+        "name": "The Evidence Color Rule",
+        "body": "A color names one stable role across the control, formula, and chart; never change a series color between views.",
+        "section": "colors"
+      },
+      {
+        "name": "The Equation-Only Mono Rule",
+        "body": "Monospace is for formulas and machine-shaped values, not a general-purpose technical costume.",
+        "section": "typography"
+      },
+      {
+        "name": "The Shared-Test-Window Rule",
+        "body": "Put the three model series on the same chart axes and display their common test dates and target together.",
+        "section": "layout"
+      }
+    ],
+    "dos": [
+      "Do keep the data source, retrieval time, adjustment method, and date split available in the audit expander.",
+      "Do preserve one series-color mapping in every plot and explanation.",
+      "Do show the model's failed or unsupported state in plain language.",
+      "Do use local/system fonts so an offline presentation does not fetch visual assets."
+    ],
+    "donts": [
+      "Don't style the app as a laboratory instrument or trading terminal; the task needs a research workbench.",
+      "Don't treat the synthetic dataset as stock evidence.",
+      "Don't hide the baseline, validation selection rule, or non-winning result.",
+      "Don't add shadows, gradients, or extra accent colors to data containers."
+    ]
+  }
+}

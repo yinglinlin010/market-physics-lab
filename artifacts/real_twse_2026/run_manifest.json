@@ -1,0 +1,84 @@
+{
+  "created_at": "2026-11-01T13:34:30.212024+00:00",
+  "tickers": [
+    "2330",
+    "2454"
+  ],
+  "price_hash": "6092163704ac9e0c8da02471d184100e5298fa8a66006dd047d5d1bc738e52d3",
+  "n_prices": 123,
+  "split": {
+    "train_end": 73,
+    "valid_end": 98,
+    "n": 123,
+    "train_dates": [
+      "2026-05-04",
+      "2026-08-14"
+    ],
+    "valid_dates": [
+      "2026-08-17",
+      "2026-09-18"
+    ],
+    "test_dates": [
+      "2026-09-21",
+      "2026-10-30"
+    ]
+  },
+  "alpha_train": 6.306256412986305,
+  "beta_train": 0.17594597035830428,
+  "data_provenance": {
+    "source": "TWSE STOCK_DAY official monthly endpoint",
+    "retrieved_at": "2026-11-01T13:34:02+00:00",
+    "adjustment": "raw close, not dividend/split adjusted",
+    "version": "csv-sha256:fbd8cf64c130780ac6bb6c9e8e1c4d4760e5c51363b00b57a8b7570bdd19cb01",
+    "license": "Open Government Data License 1.0",
+    "attribution": "臺灣證券交易所個股日收盤價資料",
+    "csv_sha256": "fbd8cf64c130780ac6bb6c9e8e1c4d4760e5c51363b00b57a8b7570bdd19cb01"
+  },
+  "target": "y_t = x_(t+1)-x_t; input known at t",
+  "features": [
+    "x",
+    "dx_lag1",
+    "vol20"
+  ],
+  "pysr_formula": {
+    "features": [
+      "x",
+      "dx_lag1",
+      "vol20"
+    ],
+    "seed": 42,
+    "niterations": 20,
+    "maxsize": 16,
+    "pysr_version": "1.5.10",
+    "selected_equation": "x * ((x * (-143.16728 * x)) - dx_lag1)",
+    "selected_index": 4,
+    "selected_complexity": 9,
+    "validation_mae": 0.007574545103730078,
+    "selection_rule": "驗證 MAE 最低；同分選複雜度較低者",
+    "training_fingerprint": "f36f1e6e590bf88ac4b076b9f01b36e746a728e127d661a774c81410b0b32b57",
+    "searched_at": "2026-11-01T13:34:30.207929+00:00",
+    "origin": "本次實驗由 PySR 預先搜尋，公式以驗證集選出",
+    "binary_operators": [
+      "+",
+      "-",
+      "*"
+    ],
+    "unary_operators": [],
+    "deterministic": true,
+    "parallelism": "serial",
+    "preprocessing": "none; natural units; features x, dx_lag1, vol20",
+    "prediction_parity": {
+      "split": "validation",
+      "max_abs_error": 4.336808689942018e-19,
+      "verified_against": "PySRRegressor.predict(index=selected_index)"
+    }
+  },
+  "formula_search": "本次本機搜尋",
+  "selection_used_test": false,
+  "note": "測試資料只在公式定版後評估。",
+  "formula_prediction_parity": {
+    "split": "validation",
+    "max_abs_error": 4.336808689942018e-19,
+    "verified_against": "PySRRegressor.predict(index=selected_index)"
+  }
+}
