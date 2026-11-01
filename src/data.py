@@ -46,6 +46,18 @@ def load_local_csv(path: str | Path, tickers: list[str]) -> PriceData:
     return load_local_csv_bytes(raw, Path(path).name, tickers)
 
 
+def load_bundled_twse_sample(path: str | Path) -> PriceData:
+    """Load the versioned, openly licensed TWSE sample shipped with the project."""
+    path = Path(path)
+    raw = path.read_bytes()
+    data = load_local_csv_bytes(raw, path.name, ["2330", "2454"])
+    data.source = "臺灣證券交易所官方固定樣本（本機資料）"
+    data.retrieved_at = "2026-11-01T13:34:02+00:00"
+    data.adjustment = "原始日收盤價（未做股利或分割還原）"
+    data.version = f"csv-sha256:{file_sha256(raw)}"
+    return data
+
+
 def load_local_csv_bytes(raw: bytes, name: str, tickers: list[str]) -> PriceData:
     frame = pd.read_csv(BytesIO(raw), parse_dates=["date"])
     required = {"date", "ticker", "close"}

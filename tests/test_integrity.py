@@ -6,12 +6,20 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.data import make_synthetic_prices
+from src.data import make_synthetic_prices, load_bundled_twse_sample
 from src.features import make_spread
 from src.models import time_split, make_samples, fit_ou, evaluate_expression
 from src.evaluation import score_predictions
 from src.experiment import run_experiment, choose_formula
 from src.state import settings_fingerprint, should_invalidate
+
+
+def test_bundled_twse_sample_provenance_and_shared_dates():
+    sample = load_bundled_twse_sample(Path(__file__).parents[1] / "data" / "twse_2330_2454_2026-05_to_2026-10.csv")
+    assert sample.prices.shape == (123, 2)
+    assert sample.prices.columns.tolist() == ["2330", "2454"]
+    assert sample.source.startswith("臺灣證券交易所官方固定樣本")
+    assert sample.version.endswith("fbd8cf64c130780ac6bb6c9e8e1c4d4760e5c51363b00b57a8b7570bdd19cb01")
 
 
 def test_synthetic_ou_parameter_recovery():
