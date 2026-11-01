@@ -353,6 +353,7 @@ dependencies = [
     { name = "pysr" },
     { name = "python-docx" },
     { name = "python-pptx" },
+    { name = "requests" },
     { name = "scikit-learn" },
     { name = "streamlit" },
 ]
@@ -371,6 +372,7 @@ requires-dist = [
     { name = "pysr", specifier = ">=1.5,<2" },
     { name = "python-docx", specifier = ">=1.1,<2" },
     { name = "python-pptx", specifier = ">=1.0,<2" },
+    { name = "requests", specifier = ">=2.32,<3" },
     { name = "scikit-learn", specifier = ">=1.5,<2" },
     { name = "streamlit", specifier = ">=1.40,<2" },
 ]

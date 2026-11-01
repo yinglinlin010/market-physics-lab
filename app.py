@@ -55,7 +55,7 @@ with st.sidebar:
     source = st.radio("資料來源", ["TWSE 官方樣本（離線，2026-05 至 10）", "合成資料（流程驗證）", "TWSE 官方歷史資料（線上查詢）", "本機 CSV"], help="官方樣本已附於專案，可離線重現；亦可用合成資料驗證已知回復機制。")
     if source.startswith("TWSE 官方樣本"):
         tickers = ["2330", "2454"]
-        period_label = "2026-05-01 至 2026-11-01（固定官方樣本）"
+        period_label = "2026-05-04 至 2026-10-30（123 個共同交易日）"
         seed = 42
         st.caption("台積電（2330）與聯發科（2454），共 123 個共同交易日；價格調整與來源可於實驗紀錄查看。")
     elif source.startswith("合成"):

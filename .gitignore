@@ -13,3 +13,5 @@ artifacts/**/pysr/
 .impeccable/questions/
 .impeccable/review/
 .DS_Store
+~$*.docx
+~$*.pptx
