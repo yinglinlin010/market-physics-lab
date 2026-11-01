@@ -55,7 +55,7 @@ uv run python scripts/search_formula.py
 uv run pytest
 ```
 
-完整測試紀錄在 `docs/test-results.md`；實驗報告為 `docs/research_report.docx`，AI 開發過程摘要為 `docs/ai_summary.md`，90 秒簡報與講稿分別在 `slides/midterm_90s.pptx`、`slides/90s_script.md`。要依最新結果重製報告及簡報，可執行 `uv run python scripts/create_deliverables.py`。
+完整測試紀錄在 `docs/test-results.md`；實驗報告為 `docs/research_report.docx`，AI 開發過程摘要為 `docs/ai_summary.md`，90 秒簡報與講稿分別在 `slides/midterm_90s.pptx`、`slides/90s_script.md`。要依最新結果重製報告及簡報，可執行 `uv run python scripts/create_deliverables.py`；再執行 `uv run python scripts/polish_presentation.py`，套用學術簡報版面規則。
 
 測試涵蓋合成 AR(1) 參數回收、測試期擾動不改變訓練估計及已選公式、共同預測日期、公式保存重載、安全算式、資料輸入錯誤、TWSE 日期與收盤欄位解析，以及設定變更時清除舊結果。
 
