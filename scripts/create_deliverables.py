@@ -160,8 +160,8 @@ normal.font.name = "PingFang TC"
 normal._element.rPr.rFonts.set(qn("w:eastAsia"), "PingFang TC")
 normal.font.size = Pt(10.5)
 normal.font.color.rgb = RGBColor.from_string(NAVY)
-normal.paragraph_format.space_after = Pt(6)
-normal.paragraph_format.line_spacing = 1.22
+normal.paragraph_format.space_after = Pt(8)
+normal.paragraph_format.line_spacing = 1.3
 for name, size, color in [("Heading 1", 15, TEAL), ("Heading 2", 12, NAVY), ("Heading 3", 10.5, TEAL)]:
     style = styles[name]
     style.font.name = "PingFang TC"
@@ -212,7 +212,12 @@ for line in ["研究對象　台積電（2330）與聯發科（2454）", "資料
     rr = p.add_run(line + "\n")
     set_run_font(rr, 11, color=NAVY)
 p = doc.add_paragraph()
-p.paragraph_format.space_before = Pt(70)
+p.paragraph_format.space_before = Pt(38)
+p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+r = p.add_run("物理三　｜　林映霖")
+set_run_font(r, 14, bold=True, color=NAVY)
+p = doc.add_paragraph()
+p.paragraph_format.space_before = Pt(16)
 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 r = p.add_run("研究報告｜2026 年 11 月")
 set_run_font(r, 10, color=MUTED)
@@ -228,9 +233,9 @@ r = p.add_run("對數價差、均值回復、OU 啟發模型、符號回歸、Py
 set_run_font(r, 10.5)
 
 section_heading("研究問題", 2)
-body("RQ1：訓練期估計的線性價差變化模型是否符合回復方向條件？RQ2：OU 啟發模型或 PySR 搜尋公式能否在未參與參數估計、搜尋與選式的測試目標上，降低無變化基準的預測誤差？")
+body("RQ1：訓練期估計的線性價差變化模型，是否符合線性回復的方向條件？", first_indent=False)
+body("RQ2：OU 啟發模型或 PySR 搜尋公式，能否在未參與估計與選式的測試資料上，降低無變化基準的預測誤差？", first_indent=False)
 doc.add_page_break()
-
 section_heading("一、研究背景與目的", 1)
 body("相關公司的價格可能共同受到市場、產業與資金環境影響。當兩個價格序列共享變動來源時，個別價格水準本身未必能反映兩者的相對偏離；以訓練期價格關係構造的對數價差，提供另一個可檢驗的狀態變數。若價差偏離後，後續變化在條件平均上朝相反方向移動，則可描述為回復傾向。這是一項經驗假說，不能由短期價格相關或單次模型係數直接確立。")
 body("本研究的目的有三：第一，在固定時間順序下建立訓練、驗證、測試程序；第二，比較基準、物理啟發線性模型與資料搜尋方程；第三，報告模型在共同測試目標上的誤差，並檢視訓練期所見回復訊號是否延伸至樣本外。研究脈絡參照共整合與誤差修正文獻，但本專題未進行單根或共整合檢定，因此不主張兩股存在正式的長期均衡關係（Engle & Granger, 1987）。")
@@ -332,7 +337,7 @@ for ref in references:
     set_run_font(r, 9.5, color=NAVY)
 doc.save(DOCS / "research_report.docx")
 
-# Formal academic presentation: 8 slides, one research narrative, cited source footer.
+# Formal academic presentation: seven slides, one research narrative, cited source footer.
 prs = Presentation()
 prs.slide_width, prs.slide_height = PptInches(13.333), PptInches(7.5)
 BG = PptColor(250, 249, 246)
@@ -369,11 +374,11 @@ def add_slide(title, number, section_label="研究發表"):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     slide.background.fill.solid()
     slide.background.fill.fore_color.rgb = BG
-    add_text(slide, .65, .25, 8, .32, f"股票也有回復力嗎？　|　{section_label}", 10, TEAL, True)
+    add_text(slide, .65, .25, 8, .32, f"股票也有回復力嗎？　|　{section_label}", 12, TEAL, True)
     add_text(slide, .65, .68, 12, .62, title, 26, INK, True)
     rule = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, PptInches(.65), PptInches(1.38), PptInches(12), PptInches(.025))
     rule.fill.solid(); rule.fill.fore_color.rgb = TEAL; rule.line.fill.background()
-    add_text(slide, .65, 6.95, 12, .35, f"{number:02d} / 09", 12, MUTED_PPT, align=PP_ALIGN.RIGHT)
+    add_text(slide, .65, 6.95, 12, .35, f"{number:02d} / 05", 12, MUTED_PPT, align=PP_ALIGN.RIGHT)
     return slide
 
 
@@ -388,93 +393,71 @@ def add_panel(slide, x, y, w, h, heading, text, accent=TEAL, body_size=16):
 # 1 Title
 s = prs.slides.add_slide(prs.slide_layouts[6]); s.background.fill.solid(); s.background.fill.fore_color.rgb = BG
 add_text(s, .85, .65, 11, .35, "期中專題研究發表", 12, TEAL, True)
-add_text(s, .85, 1.75, 11.5, 1.2, "股票也有回復力嗎？", 34, INK, True)
-add_text(s, .88, 3.0, 10.5, .75, "物理模型與 AI 公式的比較實驗", 23, MUTED_PPT)
-add_text(s, .9, 4.15, 10.9, .75, "以 TWSE 官方日收盤價，檢驗兩檔台股對數價差變化的樣本外預測", 17, INK)
-bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, PptInches(.9), PptInches(5.15), PptInches(2.0), PptInches(.06)); bar.fill.solid(); bar.fill.fore_color.rgb=TEAL; bar.line.fill.background()
-add_text(s, .9, 5.45, 10.8, .38, "台積電（2330）× 聯發科（2454）　｜　2026 年 5–10 月", 12, MUTED_PPT)
-add_text(s, .9, 6.25, 10.8, .35, "物理三　｜　林映霖", 12, MUTED_PPT)
-add_text(s, .65, 6.95, 12, .35, "01 / 09", 12, MUTED_PPT, align=PP_ALIGN.RIGHT)
+add_text(s, .85, 1.72, 11.5, 1.15, "股票也有回復力嗎？", 36, INK, True)
+add_text(s, .88, 3.02, 10.5, .65, "物理模型與 AI 公式的比較實驗", 23, MUTED_PPT)
+add_text(s, .9, 4.18, 10.9, .75, "整理兩股的相對價差，並比較三種方法對下一交易日變化的預測。", 17, INK)
+bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, PptInches(.9), PptInches(5.42), PptInches(1.55), PptInches(.06)); bar.fill.solid(); bar.fill.fore_color.rgb=TEAL; bar.line.fill.background()
+add_text(s, .9, 5.82, 10.8, .42, "物理三　｜　林映霖", 14, MUTED_PPT)
+add_text(s, .65, 6.95, 12, .35, "01 / 05", 12, MUTED_PPT, align=PP_ALIGN.RIGHT)
 
-# 2 Project purpose
-s=add_slide("專案用途｜把股票模型比較做成可操作、可核對的研究流程",2)
-add_panel(s,.8,1.75,3.8,3.65,"給誰使用","適合需要展示時間序列、物理啟發模型與符號回歸的學生或研究初學者。\n\n使用者可直接選資料並執行，不必自行拼接分析程式。",TEAL,15)
-add_panel(s,4.78,1.75,3.8,3.65,"要解決什麼問題","不同模型若使用不同日期或切分方式，誤差就難以公平比較。\n\n本工具固定共同目標與時間順序，並把訓練、驗證、測試角色說清楚。",ORANGE,15)
-add_panel(s,8.76,1.75,3.8,3.65,"使用者能帶走什麼","一次完成資料檢查、模型比較、圖表與公式解讀。\n\n結果可下載逐日 CSV，並展開來源、參數與實驗紀錄供核對。",TEAL,15)
-add_text(s,.95,5.9,11.3,.55,"用途定位：教學與研究展示工具；預測誤差比較不等於投資建議或獲利證據。",15,INK,True)
+# 2 Sample selection and purpose
+s=add_slide("樣本選擇｜為什麼用這組股票？",2)
+add_text(s,.95,1.58,11.3,.45,"研究目的：檢查兩股的相對價差，能否預測下一交易日的價差變化。",16,INK,True)
+add_panel(s,.8,2.25,3.8,3.2,"樣本｜台積電 × 聯發科","使用 TWSE 日收盤價，期間為 2026 年 5 月至 10 月，共 123 個共同交易日。",TEAL,15)
+add_panel(s,4.78,2.25,3.8,3.2,"選樣理由｜產業相關","兩家公司都屬半導體產業；訓練期日報酬相關係數為 0.51，顯示一定程度的共同漲跌。",ORANGE,15)
+add_panel(s,8.76,2.25,3.8,3.2,"研究假設｜價差可能回復","若相對價差偏離後，隔日變化朝相反方向移動，就呈現回復傾向。這是要用資料檢驗的假設。",TEAL,15)
+add_text(s,.95,5.9,11.3,.55,"共同漲跌不等於長期均衡；本研究未做共整合檢定，也不預設價差必定回復。",12,INK,True)
 
-# 3 User workflow
-s=add_slide("操作總覽｜從設定到匯出，六步完成一次比較",3)
-for x,y,w,h,n,title,body_text,color in [
-    (.85,1.75,3.65,1.65,"01","選資料","離線官方樣本、合成資料、線上 TWSE 或本機 CSV。",TEAL),
-    (4.85,1.75,3.65,1.65,"02","定條件","選股票與日期，設定訓練、驗證比例及 PySR 搜尋範圍。",TEAL),
-    (8.85,1.75,3.65,1.65,"03","執行比較","按下按鈕，依序完成資料檢查、模型估計與測試評分。",ORANGE),
-    (.85,4.0,3.65,1.65,"04","看圖表","檢視測試期間實際值與三種模型預測。",TEAL),
-    (4.85,4.0,3.65,1.65,"05","讀結論","比較 MAE、RMSE、方程式與白話解釋。",TEAL),
-    (8.85,4.0,3.65,1.65,"06","存成果","下載逐日預測 CSV，展開來源、切分和公式紀錄。",ORANGE),
+# 3 Explain why prices are transformed, plus the available inputs
+s=add_slide("用比例整理股價，做出可預測的目標",3)
+add_text(s,.95,1.48,11.3,.5,"先用比例整理兩檔股票的收盤價，算出每天的相對價差；模型才能預測這個價差隔天會怎麼變。",16,INK,True)
+add_text(s,.95,2.12,11.3,.35,"資料可從四種來源取得：TWSE 離線樣本　｜　模擬資料　｜　TWSE 線上查詢　｜　本機 CSV",14,TEAL,True)
+add_panel(s,.8,2.85,3.8,2.75,"輸入｜兩檔股票收盤價","選擇兩檔股票及資料期間，取得每日收盤價。",MUTED_PPT,15)
+add_panel(s,4.78,2.85,3.8,2.75,"整理｜用比例算相對價差","比例用來整理兩股的關係，不是最後要預測的答案。",TEAL,15)
+add_panel(s,8.76,2.85,3.8,2.75,"預測｜下一日價差變化","讓模型回答明確問題：明天的相對價差會增加還是減少、改變多少？",ORANGE,15)
+add_text(s,.95,5.95,11.3,.62,"這樣轉換，是為了把股價變成模型能學習、也能用後續資料檢查的預測目標。股票、期間、時間切分與搜尋設定都可調整。",14,INK,True)
+
+# 4 Model comparison in a clean three-row layout
+s=add_slide("三種模型｜本名、白話意思和差別",4)
+add_text(s,.95,1.58,11.3,.5,"它們都預測下一天的相對價差變化，但使用不同的猜法。",16,INK,True)
+for y, accent, title, formal_name, explanation in [
+    (2.18, MUTED_PPT, "無變化基準", "No-change baseline", "假設明天和今天一樣；提供最簡單的比較起點。"),
+    (3.43, TEAL, "OU 啟發線性回復模型", "Ornstein–Uhlenbeck-inspired linear mean-reversion model", "價差偏離平常水準時，猜它會按線性規則往回一些。"),
+    (4.68, ORANGE, "PySR 符號回歸", "PySR Symbolic Regression", "程式從資料試出預測公式，再用驗證資料挑選。"),
 ]:
-    add_panel(s,x,y,w,h,f"{n}｜{title}",body_text,color,15)
-add_text(s,.95,6.12,11.3,.45,"下列頁面依照實際介面順序，說明每一步要按什麼、會看到什麼。",15,INK,True)
+    row=s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE,PptInches(.8),PptInches(y),PptInches(11.7),PptInches(1.05))
+    row.fill.solid(); row.fill.fore_color.rgb=WHITE; row.line.color.rgb=PptColor(218,226,223)
+    stripe=s.shapes.add_shape(MSO_SHAPE.RECTANGLE,PptInches(.8),PptInches(y),PptInches(.075),PptInches(1.05))
+    stripe.fill.solid(); stripe.fill.fore_color.rgb=accent; stripe.line.fill.background()
+    add_text(s,1.05,y+.13,4.5,.3,title,16,accent,True)
+    add_text(s,1.05,y+.49,4.5,.4,formal_name,12,INK)
+    add_text(s,5.85,y+.2,6.3,.62,explanation,15,INK)
+add_text(s,.95,6.02,11.2,.42,"差別：照舊不變｜依線性想法猜回復｜讓程式搜尋公式。",14,INK,True)
 
-# 3 Configure the experiment
-s=add_slide("操作 1｜選擇資料，設定比較條件",4)
-add_panel(s,.8,1.72,5.65,3.85,"左側設定欄","① 選資料來源：離線 TWSE 樣本最適合現場展示；也可選合成、線上資料或本機 CSV。\n\n② 指定兩檔股票與日期範圍。\n\n③ 設定訓練／驗證比例，以及 PySR 搜尋迭代與公式複雜度。",TEAL,15)
-add_panel(s,6.85,1.72,5.65,3.85,"執行前先確認","主畫面會摘要顯示股票、期間、時間切分與評估目標。\n\n資料來源、價格調整方式及版本指紋可在結果區展開查看。\n\n改動任何設定後，舊結果會清除，避免把不同條件的結果混在一起。",ORANGE,15)
-add_text(s,.95,6.05,11.2,.45,"展示建議：使用隨專案保存的官方樣本；無須在現場下載資料或安裝套件。",15,INK,True)
-
-# 4 Run and understand the three models
-s=add_slide("操作 2｜執行比較，理解三個模型各自代表什麼",5)
-add_text(s,.95,1.62,11.3,.55,"按「執行比較」後，介面會檢查資料、建立價差、估計模型，再對同一批測試日期評分。",16,INK,True)
-add_panel(s,.8,2.45,3.8,2.8,"無變化基準","假設下一期價差變化為零。\n\n用途：提供簡單且透明的比較起點。",MUTED_PPT,15)
-add_panel(s,4.78,2.45,3.8,2.8,"線性回復／OU 啟發","公式：Δx̂ₜ₊₁ = a + b xₜ\n\n用途：查看價差偏離與下一期變化是否呈線性關聯。",TEAL,15)
-add_panel(s,8.76,2.45,3.8,2.8,"PySR 替代公式","從訓練資料搜尋候選公式，再用驗證資料選式。\n\n公式預先搜尋，評估現場執行。",ORANGE,15)
-add_text(s,.95,5.72,11.2,.55,"操作提示：等狀態訊息顯示完成，再往下讀圖；設定變動會讓本次結果失效。",15,INK,True)
-
-# 5 Read charts and metrics
-s=add_slide("操作 3｜先看測試圖與誤差指標",6)
-s.shapes.add_picture(str(error_figure),PptInches(.62),PptInches(1.62),width=PptInches(7.55))
-add_panel(s,8.45,1.72,4.05,1.65,"先比較 MAE","越低代表本次測試的平均絕對誤差越小。",TEAL,14)
-add_panel(s,8.45,3.58,4.05,1.65,"再看 RMSE","對較大的預測誤差給予較高權重。",TEAL,14)
-add_panel(s,8.45,5.42,4.05,1.0,"看相對改善","負值代表比無變化基準更差。",ORANGE,13)
-add_text(s,.8,6.67,7.3,.25,"圖表與表格呈現同一組保留測試目標；本例基準誤差最低。",12,MUTED_PPT)
-
-# 6 Inspect prediction trace and equations
-s=add_slide("操作 4｜對照逐日預測，查看方程式如何解讀",7)
-s.shapes.add_picture(str(prediction_figure),PptInches(.62),PptInches(1.7),width=PptInches(7.4))
-add_panel(s,8.35,1.72,4.15,1.62,"上方折線圖","逐日比較實際價差變化與三種模型預測；查看模型是否跟上波動方向與幅度。",TEAL,13)
-add_panel(s,8.35,3.55,4.15,1.62,"模型方程","頁面列出 OU 估計式與 PySR 選定公式，並提供變數順序及白話說明。",TEAL,13)
-add_panel(s,8.35,5.38,4.15,1.0,"解讀原則","公式可讀，不等於穩定或可獲利。",ORANGE,13)
-add_text(s,.75,6.7,7.2,.25,"介面另提供價差水準圖，輔助理解預測變化如何累積。",12,MUTED_PPT)
-
-# 7 Inspect conclusion and audit trail
-s=add_slide("操作 5｜讀自動結論，展開實驗細節",8)
-add_panel(s,.85,1.75,5.5,3.7,"結論區會回答","• 哪個模型 MAE 最低？\n\n• OU 訓練期是否符合線性回復條件？\n\n• 本次結果支持或不支持誤差改善？",TEAL,15)
-add_panel(s,6.75,1.75,5.5,3.7,"展開紀錄可核對","• 資料來源、取得時間、調整方式與版本雜湊。\n\n• 訓練／驗證／測試日期及模型參數。\n\n• PySR 候選公式與實驗中繼資料。",ORANGE,15)
-add_text(s,.95,6.0,11.2,.5,"結論只描述這次樣本外誤差；不代表因果證據、長期穩定性或投資報酬。",15,INK,True)
-
-# 8 Export and live demo sequence
-s=add_slide("操作 6｜下載結果，完成 90 秒展示",9)
-add_panel(s,.85,1.75,5.5,3.55,"匯出與重現","按「下載逐日預測 CSV」，保存每個測試日期的實際值與模型預測。\n\n展開「實驗紀錄與候選公式」，核對公式、設定及資料版本。\n\n重啟後仍可用隨附官方樣本重做展示。",TEAL,15)
-add_panel(s,6.75,1.75,5.5,3.55,"現場操作順序","1. 開啟本機 Streamlit 研究工具。\n2. 保留官方樣本與預設切分。\n3. 按「執行比較」，等待完成。\n4. 指出基準模型誤差最低。\n5. 展開公式，最後下載 CSV。",ORANGE,15)
-add_text(s,.95,5.85,11.2,.7,"本次實證示範的核心：模型能否勝過簡單基準，由保留測試資料回答；沒有勝出也是有效結果。",16,INK,True)
+# 5 MAE as the final comparison tool and why it is appropriate
+s=add_slide("最後比較工具｜MAE 越小越好",5)
+add_text(s,.95,1.58,11.3,.5,"MAE（平均絕對誤差）看的是：每天預測和實際差多遠，再把差距取平均。",16,INK,True)
+add_panel(s,.8,2.35,3.8,1.62,"① 算每天差距","預測值和實際值相差多少。",MUTED_PPT,15)
+add_panel(s,4.78,2.35,3.8,1.62,"② 不分高估或低估","都看差距大小，避免正負抵銷。",TEAL,15)
+add_panel(s,8.76,2.35,3.8,1.62,"③ 把差距取平均","平均後得到 MAE。",ORANGE,15)
+add_text(s,.95,4.35,11.3,.62,"判讀方式：MAE 越小，代表預測平均越接近實際。",22,TEAL,True)
+add_text(s,.95,5.25,11.2,.82,"為什麼可比較？三種模型預測同一目標，並在相同測試日期評分；所以 MAE 可以直接比較誰平均猜得較準。",16,INK,True)
 
 prs.save(SLIDES / "midterm_90s.pptx")
 
 script = """# 90 秒操作展示講稿
 
-**0–8 秒｜打開工具** 這是「股票也有回復力嗎？」研究工作台。我用它比較兩檔股票的價差預測方法。
+**0–12 秒｜樣本與目的** 本專題用台積電與聯發科的日收盤價，研究兩股的相對價差能不能預測下一交易日變化。訓練期報酬有一定同步，但這不代表價差必然回復。
 
-**8–20 秒｜選資料與設定** 左側可選官方離線樣本、合成資料、線上 TWSE 或本機 CSV。今天保留台積電與聯發科、預設期間，以及訓練、驗證、測試時間切分。
+**12–27 秒｜資料來源與設定** 工具可選四種來源：TWSE 離線樣本、程式生成的模擬股價、TWSE 線上資料和本機 CSV。股票期間、訓練與驗證比例、模擬種子及公式搜尋範圍都可以調整。
 
-**20–30 秒｜執行** 按「執行比較」。工具檢查資料，估計價差與 OU 啟發模型，並載入預先搜尋的 PySR 公式；公式預先搜尋，評估在本機執行。
+**27–42 秒｜股價轉成預測目標** 工具先用訓練期估計兩股價格關係，計算每天的相對價差，再把目標定為下一交易日價差變化。資料按時間分為訓練、驗證、測試，避免未來資訊進入建模。
 
-**30–45 秒｜看圖與指標** 結果圖比較無變化基準、線性回復模型和 PySR。先看 MAE，再看 RMSE；本次固定測試期間，無變化基準的誤差最低，兩個候選模型都沒有勝過它。
+**42–57 秒｜比較方法** 比較不變基準、平均回復模型與 PySR 搜尋公式。三種方法預測同一目標、使用相同測試日期；公式搜尋與挑選不使用測試資料。
 
-**45–62 秒｜看公式與逐日預測** 往下可對照每一天實際值和模型預測，也能看 OU 方程、PySR 選出的公式及白話解釋。公式是否有道理，仍要看它在未參與挑選的測試資料表現如何。
+**57–75 秒｜閱讀分析報告** 工具產生實際值與預測圖、誤差指標、公式解釋、結論、實驗紀錄和逐日 CSV。本次測試由不變基準誤差最低，另外兩種方法沒有勝過它。
 
-**62–76 秒｜讀結論與查紀錄** 結論根據本次 MAE 自動生成。展開實驗紀錄，可核對來源、切分、參數和候選公式；改設定後舊結果會清除。
-
-**76–90 秒｜下載與收尾** 按「下載逐日預測 CSV」保存結果。這個工具讓人可操作地比較物理啟發模型、AI 搜尋公式和簡單基準；本次沒有勝過基準也是研究結果，預測誤差不等於投資獲利。
+**75–90 秒｜MAE 與收尾** MAE 是每天預測與實際差距取絕對值後的平均。因三種方法預測同一件事，也在相同測試日期比較，可用它看哪個方法平均更接近實際值。
 """
 (SLIDES / "90s_script.md").write_text(script, encoding="utf-8")
-print("Generated academic report, 9-slide presentation, and 90-second script.")
+print("Generated academic report, 5-slide presentation, and 90-second script.")
