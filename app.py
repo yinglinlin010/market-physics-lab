@@ -201,17 +201,17 @@ st.markdown("---")
 st.subheader("測試期間：實際與預測價差變化")
 fig=go.Figure()
 fig.add_trace(go.Scatter(x=preds.date,y=preds.actual_dx,name="實際 Δx",line=dict(color="#172A35",width=2)))
-for name,color in [("無變化基準","#9AA9A5"),("線性回復／OU 啟發","#137C78"),("PySR 替代公式","#D16B3C")]:
-    fig.add_trace(go.Scatter(x=preds.date,y=preds[f"{name}_pred_dx"],name=name,line=dict(color=color,width=1.6,dash="dot")))
-fig.update_layout(height=390,margin=dict(l=8,r=8,t=20,b=8),paper_bgcolor="#F6F4EE",plot_bgcolor="#FFFFFF",legend=dict(orientation="h",y=-.22),yaxis_title="Δx（對數價差變化）",xaxis_title="預測資訊日期",hovermode="x unified")
+for name,legend_name,color in [("無變化基準","無變化基準","#9AA9A5"),("線性回復／OU 啟發","OU 啟發","#137C78"),("PySR 替代公式","PySR 公式","#D16B3C")]:
+    fig.add_trace(go.Scatter(x=preds.date,y=preds[f"{name}_pred_dx"],name=legend_name,line=dict(color=color,width=1.6,dash="dot")))
+fig.update_layout(height=430,margin=dict(l=8,r=8,t=78,b=42),paper_bgcolor="#F6F4EE",plot_bgcolor="#FFFFFF",legend=dict(orientation="h",y=1.24,x=.5,xanchor="center",yanchor="bottom",entrywidth=145),yaxis_title="Δx（對數價差變化）",xaxis_title="預測資訊日期",hovermode="x unified")
 st.plotly_chart(fig,use_container_width=True)
 
 st.subheader("測試期間：下一期價差水準")
 spread_fig=go.Figure()
 spread_fig.add_trace(go.Scatter(x=preds.date,y=preds.actual_next_spread,name="實際 xₜ₊₁",line=dict(color="#172A35",width=2)))
-for name,color in [("無變化基準","#9AA9A5"),("線性回復／OU 啟發","#137C78"),("PySR 替代公式","#D16B3C")]:
-    spread_fig.add_trace(go.Scatter(x=preds.date,y=preds[f"{name}_pred_next_spread"],name=name,line=dict(color=color,width=1.6,dash="dot")))
-spread_fig.update_layout(height=350,margin=dict(l=8,r=8,t=18,b=8),paper_bgcolor="#F6F4EE",plot_bgcolor="#FFFFFF",legend=dict(orientation="h",y=-.22),yaxis_title="下一期對數價差 xₜ₊₁",xaxis_title="預測資訊日期",hovermode="x unified")
+for name,legend_name,color in [("無變化基準","無變化基準","#9AA9A5"),("線性回復／OU 啟發","OU 啟發","#137C78"),("PySR 替代公式","PySR 公式","#D16B3C")]:
+    spread_fig.add_trace(go.Scatter(x=preds.date,y=preds[f"{name}_pred_next_spread"],name=legend_name,line=dict(color=color,width=1.6,dash="dot")))
+spread_fig.update_layout(height=390,margin=dict(l=8,r=8,t=72,b=42),paper_bgcolor="#F6F4EE",plot_bgcolor="#FFFFFF",legend=dict(orientation="h",y=1.22,x=.5,xanchor="center",yanchor="bottom",entrywidth=145),yaxis_title="下一期對數價差 xₜ₊₁",xaxis_title="預測資訊日期",hovermode="x unified")
 st.plotly_chart(spread_fig,use_container_width=True)
 
 colf, colm=st.columns([1.2,1])

@@ -52,18 +52,18 @@ error_figure = ASSETS / "academic_test_errors.png"
 fig.savefig(error_figure, facecolor="white", bbox_inches="tight")
 plt.close(fig)
 
-fig, ax = plt.subplots(figsize=(9, 3.7), dpi=180)
+fig, ax = plt.subplots(figsize=(9, 4.1), dpi=180)
 ax.plot(preds.date, preds.actual_dx, color="#172A35", lw=1.8, marker="o", ms=2.5, label="實際 Δx")
 for name, color in zip(metrics.index, COLORS):
     ax.plot(preds.date, preds[f"{name}_pred_dx"], color=color, lw=1.25, ls="--", label=name)
-ax.set_title("測試期間逐日價差變化：實際值與一步預測", fontsize=12)
+fig.suptitle("測試期間逐日價差變化：實際值與一步預測", fontsize=12, y=.98)
 ax.set_ylabel("Δx（對數價差變化）", fontsize=12)
 ax.set_xlabel("預測資訊日 t（目標為下一交易日）", fontsize=12)
 ax.tick_params(labelsize=12)
 ax.spines[["top", "right"]].set_visible(False)
 ax.grid(color="#E6E9E6", linewidth=.55)
-ax.legend(frameon=False, ncol=2, fontsize=12, loc="upper left")
-fig.tight_layout()
+ax.legend(frameon=False, ncol=2, fontsize=12, loc="upper center", bbox_to_anchor=(.5, 1.28))
+fig.subplots_adjust(left=.09, right=.98, bottom=.18, top=.68)
 prediction_figure = ASSETS / "academic_test_predictions.png"
 fig.savefig(prediction_figure, facecolor="white", bbox_inches="tight")
 plt.close(fig)
