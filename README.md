@@ -1,6 +1,9 @@
 # 股票也有回復力嗎？
 
-**物理模型與 AI 公式的比較實驗**是一個本機 Streamlit 研究工作台，檢查兩檔台股的訓練期對數價差，並比較「無變化」、「線性回復／OU 啟發」與 PySR 搜尋公式對下一期價差變化的預測。這是物理啟發假說的研究，不是交易策略或獲利測試。
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://market-physics-lab-9v8at2bxhnbtdwxdb2cj9x.streamlit.app/)
+> **線上展示網址（免安裝直接操作）**：[https://market-physics-lab-9v8at2bxhnbtdwxdb2cj9x.streamlit.app/](https://market-physics-lab-9v8at2bxhnbtdwxdb2cj9x.streamlit.app/)
+
+**物理模型與 AI 公式的比較實驗**是一個 Streamlit 研究工作台，檢查兩檔台股的訓練期對數價差，並比較「無變化」、「線性回復／OU 啟發」與 PySR 搜尋公式對下一期價差變化的預測。這是物理啟發假說的研究，不是交易策略或獲利測試。
 
 ## 快速啟動
 
